@@ -17,7 +17,6 @@ import {
   FieldGroup,
   FieldLabel,
 } from '@/components/ui/field';
-import { Input } from '@base-ui/react';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import { authClient } from '@/lib/auth.client';
@@ -26,6 +25,7 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import { Spinner } from './ui/spinner';
 import Link from 'next/link';
+import { Input } from './ui/input';
 
 const signInFormSchema = z.object({
   email: z.email({ message: 'Invalid Email' }),
@@ -65,7 +65,7 @@ export default function SignInForm() {
         },
       );
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +87,7 @@ export default function SignInForm() {
   //   );
 
   return (
-    <Card className="w-full sm:max-w-md border-8">
+    <Card className="w-full border-8 sm:max-w-md">
       <CardHeader className="justify-center">
         <CardTitle className="text-center">Sign In</CardTitle>
         <CardDescription className="text-center">
