@@ -8,15 +8,18 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String     @id
   name          String
-  email         String    @unique
-  emailVerified Boolean   @default(false)
+  email         String     @unique
+  emailVerified Boolean    @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
   accounts      Account[]
   sessions      Session[]
+  posts         Post[]
+  categories    Category[]
+  savedPosts    String[]   @default([])
 
   @@map("user")
 }
@@ -66,4 +69,40 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Post {
+  id         String     @id @default(uuid())
+  title      String
+  slug       String
+  content    String
+  imageUrl   String
+  views      Int        @default(0)
+  tags       String[]
+  status     PostStatus @default(published)
+  userId     String
+  user       User       @relation(references: [id], fields: [userId], onDelete: Cascade)
+  categoryId String?
+  category   Category?  @relation(references: [id], fields: [categoryId], onDelete: Cascade)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @default(now())
+
+  @@map("post")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@map("category")
+}
+
+enum PostStatus {
+  published
+  draft
 }

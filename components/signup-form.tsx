@@ -17,7 +17,6 @@ import {
   FieldGroup,
   FieldLabel,
 } from '@/components/ui/field';
-import { Input } from '@base-ui/react';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import { authClient } from '@/lib/auth.client';
@@ -26,6 +25,7 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import { Spinner } from './ui/spinner';
 import Link from 'next/link';
+import { Input } from './ui/input';
 
 const signUpFormSchema = z
   .object({
@@ -73,7 +73,7 @@ export default function SignUpForm() {
         },
       );
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
