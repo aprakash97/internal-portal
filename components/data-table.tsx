@@ -33,8 +33,6 @@ export function DataTable<TData, TValue>({
     // getPaginationRowModel: getPaginationRowModel(), // optional pagination
   });
 
-  console.log('data', data);
-
   return (
     <div className="rounded-md border">
       <Table>

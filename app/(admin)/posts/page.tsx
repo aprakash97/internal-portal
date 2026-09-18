@@ -1,7 +1,45 @@
-export default function PostsPage() {
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { getAllPosts } from '@/app/actions/posts';
+import { DataTable } from '@/components/data-table';
+import { columns } from './clients/columns';
+
+export default async function PostsPage() {
+  const data = await getAllPosts();
+
+  console.log('data', data);
+  console.log('columns', columns);
+  
   return (
-    <div>
-      <h1>Posts Page</h1>
-    </div>
+    <>
+      <div className="flex flex-col p-8">
+        <div className="flex w-full justify-between">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>posts</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <Link href="/posts/new">
+            <Button className="cursor-pointer">Create new posts</Button>
+          </Link>
+        </div>
+      </div>
+
+      <DataTable data={data} columns={columns} />
+    </>
   );
 }
