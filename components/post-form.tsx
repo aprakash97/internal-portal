@@ -5,7 +5,6 @@ import { Controller, useForm } from 'react-hook-form';
 import z, { object } from 'zod';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from '@base-ui/react';
-import { Link } from 'lucide-react';
 import { Field, FieldError, FieldGroup, FieldLabel } from './ui/field';
 import { Spinner } from './ui/spinner';
 import { Button } from './ui/button';
@@ -21,8 +20,9 @@ import {
 } from './ui/select';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { Textarea } from './ui/textarea';
 import { generateSlug } from '@/lib/utils';
+import RichTextEditor from './toolbars/editor';
+import { createPost, updatePost } from '@/app/actions/posts';
 
 const formSchema = z.object({
   id: z.string().optional(),
@@ -36,7 +36,7 @@ const formSchema = z.object({
   slug: z.string().trim().min(5, 'Title is required'),
 });
 
-export type FormValues = z.infer<typeof formSchema>;
+export type PostFormValues = z.infer<typeof formSchema>;
 
 export default function PostForm({
   id,
@@ -48,7 +48,7 @@ export default function PostForm({
   slug,
   tags,
   categories,
-}: FormValues) {
+}: PostFormValues) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     mode: 'onTouched',
@@ -68,16 +68,19 @@ export default function PostForm({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: PostFormValues) => {
     try {
       setIsLoading(true);
       if (id) {
-        // TODO:
+        await updatePost(data);
+        toast.success('Post updated successfully');
+      } else {
+        await createPost(data);
+        toast.success('Post created successfully');
       }
-      //   await createPost(data);
-      toast.success('Post Successfully');
-        router.refresh();
-        router.push('/posts');
+
+      router.refresh();
+      router.push('/posts');
     } catch (err) {
       console.error(err);
       toast.error('Post Failed');
@@ -170,13 +173,17 @@ export default function PostForm({
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="form-rhf-demo-content">Content</FieldLabel>
-                <Textarea
+                {/* <Textarea
                   {...field}
                   id="form-rhf-demo-content"
                   aria-invalid={fieldState.invalid}
                   placeholder="Content"
                   autoComplete="off"
                   className="border border-gray-300"
+                /> */}
+                <RichTextEditor
+                  content={field.value}
+                  onChange={field.onChange}
                 />
 
                 {fieldState.invalid && (
@@ -231,16 +238,27 @@ export default function PostForm({
                     </FieldLabel>
                     <SingleSelect
                       {...field}
-                      key={field.name}
+                      value={field.value}
+                      // TODO
                       onValueChange={field.onChange}
                     >
-                      <SelectTrigger
-                        className="w-full max-w-48"
-                        key={field.name}
-                      >
-                        <SelectValue placeholder="Category" />
+                      <SelectTrigger className="w-full max-w-48">
+                        <SelectValue placeholder="Category">
+                          {(value) => {
+                            const category = categories?.find(
+                              (category) => category.id === value,
+                            );
+
+                            return category?.name ?? 'Category';
+                          }}
+                        </SelectValue>
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent
+                        side="bottom"
+                        align="start"
+                        alignItemWithTrigger={false}
+                        sideOffset={4}
+                      >
                         {categories?.map((category) => (
                           <SelectItem key={category.id} value={category.id}>
                             {category.name}
@@ -263,18 +281,19 @@ export default function PostForm({
                     <FieldLabel htmlFor="form-rhf-demo-status">
                       Status
                     </FieldLabel>
-                    <SingleSelect
-                      {...field}
-                      key={field.name}
-                      onValueChange={field.onChange}
-                    >
+                    <SingleSelect {...field} onValueChange={field.onChange}>
                       <SelectTrigger className="w-full max-w-48">
                         <SelectValue placeholder="Status Type" />
                       </SelectTrigger>
-                      <SelectContent>
-                        {['Publish', 'Draft'].map((status) => (
+                      <SelectContent
+                        side="bottom"
+                        align="start"
+                        alignItemWithTrigger={false}
+                        sideOffset={4}
+                      >
+                        {['published', 'draft'].map((status) => (
                           <SelectItem key={status} value={status}>
-                            {status}
+                            {status.toUpperCase()}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -294,7 +313,7 @@ export default function PostForm({
         <Button
           type="submit"
           form="form-rhf-demo"
-          className="max-w-40 cursor-pointer p-6 m-2"
+          className="m-2 max-w-40 cursor-pointer p-6"
           //   disabled={!form.formState.isValid || form.formState.isSubmitting}
         >
           {isLoading ?? <Spinner className="size-6" />} Save Changes
