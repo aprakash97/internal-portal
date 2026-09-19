@@ -26,3 +26,11 @@ export function stripeHtml(html: string) {
     .replace(/\s+/g, ' ')
     .trim();
 }
+
+export const getNameInitials = (name: String) => {
+  if (!name) return null;
+  return name
+    .split(' ')
+    .map((part) => part.charAt(0))
+    .join('');
+};

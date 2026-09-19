@@ -67,7 +67,7 @@ export default async function BlogPage({
         <div className="flex flex-wrap gap-2 py-6">
           {post.tags.map((tag) => (
             <Link href={`/blog/tag/${tag}`} key={tag}>
-              <Badge variant="outline" >#{tag}</Badge>
+              <Badge variant="outline">#{tag}</Badge>
             </Link>
           ))}
         </div>

@@ -22,7 +22,13 @@ export default function Pagination({
     <div className="flex w-full flex-row gap-6 pb-14">
       <div className="flex w-full justify-center gap-6">
         <Button
-          onClick={() => router.push(`${pageUrl}?page=${currentPage - 1}`)}
+          onClick={() =>
+            router.push(
+              pageUrl
+                ? `${pageUrl}?page=${currentPage - 1}`
+                : `?page=${currentPage - 1}`,
+            )
+          }
           aria-disabled={currentPage === 1}
           disabled={currentPage === 1}
           className={cn(
@@ -37,7 +43,13 @@ export default function Pagination({
         </div>
 
         <Button
-          onClick={() => router.push(`${pageUrl}?page=${currentPage + 1}`)}
+          onClick={() =>
+            router.push(
+              pageUrl
+                ? `${pageUrl}?page=${currentPage + 1}`
+                : `?page=${currentPage + 1}`,
+            )
+          }
           aria-disabled={currentPage === totalPages}
           className={cn(
             'flex h-10 w-10 cursor-pointer items-center justify-center rounded-full opacity-100 shadow-lg',
