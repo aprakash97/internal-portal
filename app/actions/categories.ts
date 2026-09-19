@@ -24,6 +24,29 @@ export const getCategories = async () => {
   }
 };
 
+export const getCategoriesWithUser = async () => {
+  try {
+    const session = await authSession();
+
+    if (!session) {
+      throw new Error('Unauthorized: User Id not found');
+    }
+    const res = await prisma.category.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return res;
+  } catch (err) {
+    console.error({ err });
+    throw new Error('Something went wrong');
+  }
+};
+
 export const createCategory = async (name: string) => {
   try {
     const session = await authSession();

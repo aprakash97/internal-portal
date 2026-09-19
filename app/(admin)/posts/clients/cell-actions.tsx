@@ -1,5 +1,6 @@
 'use client';
 
+import { deletePost } from '@/app/actions/posts';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -9,7 +10,6 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Spinner } from '@/components/ui/spinner';
-import { useCategories } from '@/hooks/use-category';
 import { Copy, Edit, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -28,7 +28,7 @@ export default function CellActions({ id }: { id: string }) {
   const onRemovePost = async () => {
     try {
       setIsLoading(true);
-      // await deletePost(id);
+      await deletePost(id);
       toast.success(`Post deleted successfully`);
     } catch (err: any) {
       throw new Error(`Something went wrong ${err?.message}`);
