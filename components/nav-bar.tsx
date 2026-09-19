@@ -33,7 +33,8 @@ export default function NavBar({
         </NavigationMenuList>
 
         <NavigationMenuList className="flex-wrap">
-          <NavigationMenuItem className="hidden md:block">
+          {/* <NavigationMenuItem className="hidden md:block"> */}
+          <NavigationMenuItem>
             <div
               className="mr-6 cursor-pointer"
               onClick={() => setIsOpen(true)}
@@ -41,10 +42,10 @@ export default function NavBar({
               <Search />
             </div>
 
-            <GlobalSearchModal isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <GlobalSearchModal isOpen={isOpen} setIsOpen={setIsOpen} />
           </NavigationMenuItem>
 
-          <NavigationMenuItem className="hidden md:block">
+          <NavigationMenuItem>
             <NavigationMenuTrigger>
               <Avatar className="2-8 h-8 rounded-full">
                 <AvatarImage

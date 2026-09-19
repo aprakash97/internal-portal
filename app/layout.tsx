@@ -4,6 +4,7 @@ import {
   Geist_Mono,
   Noto_Sans,
   Playfair_Display,
+  Inter,
 } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -13,7 +14,7 @@ const playfairDisplayHeading = Playfair_Display({
   variable: '--font-heading',
 });
 
-const notoSans = Noto_Sans({ subsets: ['latin'], variable: '--font-sans' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -40,8 +41,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         geistSans.variable,
         geistMono.variable,
         'font-sans',
-        notoSans.variable,
         playfairDisplayHeading.variable,
+        'font-sans',
+        inter.variable,
       )}
     >
       <body className="mx-5 flex min-h-full flex-col">{children}</body>
