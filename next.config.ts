@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         hostname: 'utfs.io',
         protocol: 'https',
       },
+      {
+        protocol: 'https',
+        hostname: 'mockmind-api.uifaces.co',
+      },
     ],
   },
 };

@@ -40,12 +40,7 @@ export const columns: ColumnDef<PostWithCategory>[] = [
       return (
         <div className="relative h-10">
           <Image
-            src={
-              row.original.imageUrl !== ''
-                ? row.original.imageUrl
-                : '/defaultImage.svg'
-            }
-            // src={'images.jpg'}
+            src={row.original.imageUrl || '/defaultImage.svg'}
             alt={row.original.title}
             fill
             className="rounded-sm"

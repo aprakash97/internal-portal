@@ -17,3 +17,12 @@ export const NODE_HANDLES_SELECTED_STYLE_CLASSNAME =
 export function isValidUrl(url: string) {
   return /^https?:\/\/\S+$/.test(url);
 }
+
+export function stripeHtml(html: string) {
+  if (!html) return '';
+
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
