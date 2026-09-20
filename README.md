@@ -30,7 +30,7 @@ The frontend and backend are implemented within the same Next.js application. Se
 
 This approach was chosen because the application is a relatively small internal portal and does not currently require an API for external clients.
 
-```text
+```Flow
 Frontend
    ↓
 Next.js Server Actions
@@ -38,3 +38,21 @@ Next.js Server Actions
 Prisma ORM
    ↓
 PostgreSQL
+```
+## Getting Started
+
+```bash
+git clone <repository-url>
+cd <project-directory>
+npm install
+```
+## Setup .env file
+
+```Refer more on .env.example 
+DATABASE_URL=""
+
+BETTER_AUTH_SECRET=""
+
+BETTER_AUTH_URL= # Base URL of your app
+UPLOADTHING_TOKEN=''
+```
