@@ -62,13 +62,13 @@ export default function GlobalSearchModal({
     };
   }, [query]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      setIsLoading(false);
-      setResults([]);
-      setQuery('');
-    }
-  }, [results, isOpen]);
+  //   useEffect(() => {
+  //     if (!isOpen) {
+  //       setIsLoading(false);
+  //       setResults([]);
+  //       setQuery('');
+  //     }
+  //   }, [results, isOpen]);
 
   const grouped = useMemo(() => {
     const posts = results.filter((res) => res.type === 'post') as Extract<

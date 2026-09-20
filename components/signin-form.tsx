@@ -91,7 +91,7 @@ export default function SignInForm() {
       <CardHeader className="justify-center">
         <CardTitle className="text-center">Sign In</CardTitle>
         <CardDescription className="text-center">
-          Test App Portal
+          Internal Portal
         </CardDescription>
       </CardHeader>
       <CardContent>

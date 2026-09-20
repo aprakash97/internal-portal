@@ -24,6 +24,7 @@ interface PostProps {
 
 export default function PostCard({ post }: PostProps) {
   const excerpt = stripeHtml(post.content);
+  console.log('test', post);
   return (
     <Card className="relative w-full gap-1 border-0 p-0 pb-4 shadow-md">
       <div className="relative h-60">
@@ -42,7 +43,9 @@ export default function PostCard({ post }: PostProps) {
       </CardHeader>
       <CardContent>
         {/* <RichTextViewer content={post.content} /> */}
-        <p className="flex flex-wrap gap-2 py-6">{excerpt}</p>
+        <div className="line-clamp-2 h-40">
+          <p className="flex flex-wrap gap-2 py-6">{excerpt}</p>
+        </div>
         <div className="flex flex-wrap gap-2 py-6">
           {post.tags.map((tag) => (
             <Link href={`/blog/tag/${tag}`} key={tag}>
