@@ -9,11 +9,12 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { authClient } from '@/lib/auth.client';
-import { LayoutDashboard, LogOut, Search } from 'lucide-react';
+import { LayoutDashboard, LogIn, LogOut, Search } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { getNameInitials } from '@/lib/utils';
 import { useState } from 'react';
 import GlobalSearchModal from './global-search-modal';
+import { useRouter } from 'next/navigation';
 
 export default function NavBar({
   name,
@@ -23,6 +24,7 @@ export default function NavBar({
   userImage?: string;
 }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const router = useRouter();
   return (
     <NavigationMenu className="mx-auto my-1 flex w-full max-w-full">
       <div className="container flex w-full justify-center">
@@ -60,13 +62,23 @@ export default function NavBar({
                 <LayoutDashboard />
                 Dashboard
               </NavigationMenuLink>
-              <NavigationMenuLink
-                className="cursor-pointer"
-                onClick={() => authClient.signOut()}
-              >
-                <LogOut />
-                Signout
-              </NavigationMenuLink>
+              {name ? (
+                <NavigationMenuLink
+                  className="cursor-pointer"
+                  onClick={() => authClient.signOut()}
+                >
+                  <LogOut />
+                  Signout
+                </NavigationMenuLink>
+              ) : (
+                <NavigationMenuLink
+                  className="cursor-pointer"
+                  onClick={() => router.push('/sign-in')}
+                >
+                  <LogIn />
+                  Sign-in
+                </NavigationMenuLink>
+              )}
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>

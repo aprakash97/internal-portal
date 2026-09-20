@@ -88,11 +88,11 @@ export default function SignUpForm() {
   //   );
 
   return (
-    <Card className="w-full sm:max-w-md border-8">
+    <Card className="w-full border-8 sm:max-w-md">
       <CardHeader className="justify-center">
         <CardTitle className="text-center">Sign Up</CardTitle>
         <CardDescription className="text-center">
-          Test App Portal
+          Internal Portal
         </CardDescription>
       </CardHeader>
       <CardContent>
