@@ -1,4 +1,4 @@
-# Internal Portal
+# Internal Portal (Demo App)
 
 An internal employee portal for sharing and discovering project-related knowledge within an organization.
 
@@ -29,8 +29,8 @@ This project is built as a full-stack Next.js application.
 The frontend and backend are implemented within the same Next.js application. Server Actions are used for server-side operations and database interactions instead of a separate REST API.
 
 This approach was chosen because the application is a relatively small internal portal and does not currently require an API for external clients.
-
-```Flow
+# App Flow
+```
 Frontend
    ↓
 Next.js Server Actions
@@ -47,8 +47,8 @@ cd <project-directory>
 npm install
 ```
 ## Setup .env file
-
-```Refer more on .env.example 
+# Refer more on .env.example 
+```
 DATABASE_URL=""
 
 BETTER_AUTH_SECRET=""
