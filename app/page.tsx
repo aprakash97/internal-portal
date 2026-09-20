@@ -5,6 +5,8 @@ import NavBar from '@/components/nav-bar';
 import Pagination from '@/components/pagination';
 import { authSession } from '@/lib/auth.utils';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home({
   searchParams,
 }: {

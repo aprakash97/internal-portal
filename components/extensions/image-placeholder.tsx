@@ -207,12 +207,12 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
         </PopoverTrigger>
         <PopoverContent
           className="w-[450px] px-0 py-2"
-          onPointerDownOutside={() => {
+          onPointerDown={() => {
           	setOpen(false);
           }}
-          onEscapeKeyDown={() => {
-          	setOpen(false);
-          }}
+          // onEscapeKeyDown={() => {
+          // 	setOpen(false);
+          // }}
           // TODO: should be commented out for production
         >
           <Tabs defaultValue="upload" className="px-3">

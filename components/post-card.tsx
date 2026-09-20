@@ -11,7 +11,7 @@ import RichTextViewer from './rich-text-viewer';
 import { stripeHtml } from '@/lib/utils';
 
 interface PostProps {
-  post: Post & { category: Category } & {
+  post: Post & { category: Category | null} & {
     user: {
       name: string;
       id: string;
@@ -24,7 +24,6 @@ interface PostProps {
 
 export default function PostCard({ post }: PostProps) {
   const excerpt = stripeHtml(post.content);
-  console.log('test', post);
   return (
     <Card className="relative w-full gap-1 border-0 p-0 pb-4 shadow-md">
       <div className="relative h-60">

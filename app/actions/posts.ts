@@ -180,3 +180,32 @@ export const getPosts = async (page: number) => {
     throw new Error('Something went wrong');
   }
 };
+
+export const getTags = async () => {
+  try {
+    const session = await authSession();
+
+    if (!session) {
+      throw new Error('Unauthorized: User Id not found');
+    }
+
+    const res = await prisma.post.findMany({
+      distinct: ['tags'],
+      select: {
+        tags: true,
+      },
+    });
+
+    // return res
+    //   .flatMap((r) => r.tags)
+    //   .map((t) => ({
+    //     value: t,
+    //     label: t,
+    //   }));
+    // const uniqueTag = new Set(res.flatMap((r) => r.tags);
+    return res.flatMap((r) => r.tags);
+  } catch (err) {
+    console.error({ err });
+    throw new Error('Something went wrong');
+  }
+};

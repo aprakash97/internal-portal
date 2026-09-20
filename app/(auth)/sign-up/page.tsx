@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import SignUpForm from '@/components/signup-form';
 import { requireNoAuth } from '@/lib/auth.utils';
 

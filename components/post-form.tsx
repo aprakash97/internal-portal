@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import z, { object } from 'zod';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Input } from '@base-ui/react';
 import { Field, FieldError, FieldGroup, FieldLabel } from './ui/field';
 import { Spinner } from './ui/spinner';
 import { Button } from './ui/button';
@@ -23,6 +22,7 @@ import { useRouter } from 'next/navigation';
 import { generateSlug } from '@/lib/utils';
 import RichTextEditor from './toolbars/editor';
 import { createPost, updatePost } from '@/app/actions/posts';
+import { Input } from './ui/input';
 
 const formSchema = z.object({
   id: z.string().optional(),
@@ -68,6 +68,7 @@ export default function PostForm({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  console.log('tage', tags);
   const onSubmit = async (data: PostFormValues) => {
     try {
       setIsLoading(true);
@@ -201,6 +202,7 @@ export default function PostForm({
                 <FieldLabel htmlFor="form-rhf-demo-tags">Tags</FieldLabel>
                 <Select
                   isMulti
+                  options={tags}
                   isClearable
                   {...field}
                   onCreateOption={(value) => {
