@@ -51,7 +51,7 @@ export default function NavBar({
             <NavigationMenuTrigger>
               <Avatar className="2-8 h-8 rounded-full">
                 <AvatarImage
-                  src={userImage || '/defaultImage.svg'}
+                  src={userImage || '/defaultUser.svg'}
                   className="rounded-full"
                 />
                 <AvatarFallback>{getNameInitials(name || '')}</AvatarFallback>

@@ -20,10 +20,9 @@ export default async function BlogPage({
     return null;
   }
 
-  console.log('post', post, slug);
   return (
     <div className="flex w-full flex-col items-center p-6 md:p-0">
-      <div className="flex max-w-6xl flex-col justify-center gap-6">
+      <div className="flex max-w-4xl flex-col justify-center gap-6 text-center">
         <h1 className="text-2xl font-semibold md:text-5xl">{post.title}</h1>
         <div className="flex gap-6 text-sm">
           <div className="flex gap-6">

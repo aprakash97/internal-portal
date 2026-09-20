@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'mockmind-api.uifaces.co',
       },
+      {
+        protocol: 'https',
+        hostname: 'ibb.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'r7f39czs4t.ufs.sh',
+      },
     ],
   },
 };
