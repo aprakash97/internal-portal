@@ -11,7 +11,7 @@ import RichTextViewer from './rich-text-viewer';
 import { stripeHtml } from '@/lib/utils';
 
 interface PostProps {
-  post: Post & { category: Category } & {
+  post: Post & { category: Category | null} & {
     user: {
       name: string;
       id: string;

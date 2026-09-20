@@ -5,6 +5,8 @@ import { HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Toaster } from 'sonner';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminLayout({
   children,
 }: {
