@@ -56,6 +56,12 @@ BETTER_AUTH_SECRET=""
 BETTER_AUTH_URL= # Base URL of your app
 UPLOADTHING_TOKEN=''
 ```
+## Database Setup 
+
+```
+npx prisma generate
+npx prisma migrate deploy
+````
 
 ## Technical Decisions
 
