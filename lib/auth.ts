@@ -11,9 +11,6 @@ export const auth = betterAuth({
     enabled: true,
     minPasswordLength: 3,
   },
-  trustedOrigins: [
-    'http://localhost:3000',
-    'https://internal-portal-jb8wfuc6m-prakash-anandakumars-projects.vercel.app',
-  ],
+  trustedOrigins: [process.env.BETTER_AUTH_URL!],
   // plugins: [nextCookies()],
 });
