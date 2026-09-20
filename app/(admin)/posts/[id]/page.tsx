@@ -1,5 +1,5 @@
 import { getCategories } from '@/app/actions/categories';
-import { getUniquePost } from '@/app/actions/posts';
+import { getTags, getUniquePost } from '@/app/actions/posts';
 import PostForm from '@/components/post-form';
 import {
   Breadcrumb,
@@ -18,6 +18,14 @@ export default async function PostPage({
   const { id } = await params;
   const post = await getUniquePost(id);
   const categories = await getCategories();
+  const tags = await getTags();
+
+  const uniqueTags = Array.from(new Set(tags));
+  const transform = uniqueTags.map((t) => ({
+    value: t,
+    label: t,
+  }));
+
   return (
     <>
       <div className="flex flex-col p-8">
@@ -61,7 +69,7 @@ export default async function PostPage({
             content={''}
             imageUrl={''}
             categoryId={''}
-            tags={[]}
+            tags={transform}
             status={''}
             slug={''}
             categories={categories}
