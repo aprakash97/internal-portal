@@ -1,11 +1,12 @@
 'use client';
 
 import { OurFileRouter } from '@/app/api/uploadthing/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
 import { UploadDropzone } from '@/lib/uploadThing';
+import { Button } from './ui/button';
 
 type ImageUploaderProps = {
   defaultUrl: string | null;
@@ -26,19 +27,32 @@ export default function ImageUploader({
     onChange?.(url);
   };
 
+  const handleRemove = () => {
+    setValue(null);
+    setShowDropzone(true);
+    onChange?.(null);
+  };
+
+  useEffect(() => {
+    setValue(defaultUrl ?? null);
+    setShowDropzone(!defaultUrl);
+  }, [defaultUrl]);
+
   if (!showDropzone && value) {
     return (
       <div className="relative">
-        <div className="relative w-full min-w-[150] min-h-[50] shadow-lg overflow-hidden rounded-xl">
+        <div className="relative min-h-[50] w-full min-w-[150] overflow-hidden rounded-xl shadow-lg">
           <Image src={value} className="object-cover" fill alt="thumbnail" />
         </div>
         <div className="mt-3 flex gap-2">
-          <button
+          <Button
             type="button"
-            className="absolute rounded-full right-0 top-0 bg-white opacity-60 hover:opacity-100 shadow-2xl p-2 m-2 cursor-pointer"
+            variant="destructive"
+            className="absolute top-0 right-0 m-2 cursor-pointer rounded-full bg-white p-2 opacity-60 shadow-2xl hover:opacity-100"
+            onClick={handleRemove}
           >
             <X />
-          </button>
+          </Button>
         </div>
       </div>
     );
