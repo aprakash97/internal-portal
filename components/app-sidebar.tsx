@@ -10,8 +10,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { MenuItem } from '@base-ui/react';
-import { Calendar, Home, Save, Search } from 'lucide-react';
+import { Calendar, Home, Search, Settings } from 'lucide-react';
+import Link from 'next/link';
 
 const items = [
   {
@@ -30,9 +30,9 @@ const items = [
     icon: Calendar,
   },
   {
-    title: 'Saved Posts',
-    url: '/saved-posts',
-    icon: Save,
+    title: 'Settings',
+    url: '/settings',
+    icon: Settings,
   },
 ];
 
@@ -47,7 +47,7 @@ export function AppSidebar() {
           <SidebarMenu>
             {items.map((items) => (
               <SidebarMenuItem key={items.title}>
-                <SidebarMenuButton render={<a href={items.url} />}>
+                <SidebarMenuButton render={<Link href={items.url} />}>
                   <items.icon /> <span>{items.title}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
